@@ -1,0 +1,173 @@
+%
+% TU/e Style Master Thesis template for LaTeX
+%
+% Public version 1.0
+% 2010 - 2013 Thijs Nugteren and Joos Buijs
+%
+% THIS IS THE MAIN FILE (i.e. compile this file, compiling the others directly won't work)
+%
+\documentclass[a4paper,10pt,twoside]{report}
+
+%all the other includes etc. are done in the thesis.sty file.
+\usepackage{thesis}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{physics}
+\usepackage{xcolor}
+\usepackage{circuitikz}
+\usepackage{tikz}
+
+\usetikzlibrary{positioning}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{external}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes,arrows}
+\tikzexternalize
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{lemma}{Lemma}[section]
+
+
+\newcommand{\ideal}{
+\begin{tikzpicture}
+[decoration={markings, 
+	mark= at position 0.7 with {\arrow{stealth}}}
+] 
+    \draw (0,0.3)--(0.3,0.3);
+    \draw (0.3, 0.3)--(0.3,1);
+    \draw(0.3, 1)--(0.6, 1);
+    \draw[densely dotted] (0, 0.65) -- (0.6, .65);
+    \draw[densely dotted] (0.3, 1.1) -- (0.3, .2);
+\end{tikzpicture}
+}
+%
+% These commands need to be defined in order to produce a correct and personalized document
+%
+\newcommand{\shortdoctitle}{Internship Report}
+\newcommand{\doctitle}{Quantitative Methods for Relay Feedback Amplifier Circuits}
+\newcommand{\docsubtitle}{Internship Report}
+
+\newcommand{\me}{Joost Victor van de Beek}
+\newcommand{\keywords}{keyword1, keyword2, keyword3}
+\newcommand{\version}{EMPTY version}
+\newcommand{\monthYear}{15 December 2023}
+
+%Be sure to use all the titles for your committee members!!! (their names show up on the very first page!)
+\newcommand{\firstCommitteeMember}{Dr. Amritam Das}
+\newcommand{\secondCommitteeMember}{Your second Committee Member, usually the daily supervisor}
+\newcommand{\thirdCommitteeMember}{Your Third Committee Member, usually the external member}
+
+\newcommand{\Idnumber}{1256769}
+\newcommand{\Program}{Master Systems \& Control}
+\author{\me}
+
+%
+% PDF settings
+%
+\hypersetup
+{
+    pdfauthor={\me},
+    pdftitle={\shortdoctitle},
+    pdfsubject={\doctitle},
+    pdfkeywords={\keywords}
+}
+
+\begin{document}
+
+%use this include for PDF and distribution versions
+\pagenumbering{roman}
+\include{titlepage}
+
+\normalsize
+
+\clearemptydoublepage
+
+%Sometimes line numbers are nice, uncomment the next line to enable:
+%\linenumbers
+
+%It could be handy to have a list of todos and brainstorms in your thesis
+%\chapter*{*General todos*}\todo{remove this chapter}
+%\input{chapters/general_todos}
+
+%\chapter*{*Brainstorm results*}\todo{remove this chapter}
+%\input{chapters/brainstorm_results}
+
+\chapter*{Abstract}\label{chapter:abstract}
+\input{chapters/abstract}
+
+\clearemptydoublepage
+
+%An executive summary if you want:
+%\chapter*{Executive summary}\label{chapter:executive_summary}
+%\input{chapters/executive_summary}
+
+%\clearemptydoublepage
+
+
+\chapter*{Preface}\label{chapter:preface}
+\input{chapters/preface}
+
+\clearemptydoublepage
+
+\tableofcontents
+
+\clearemptydoublepage
+
+\listoffigures
+
+\clearemptydoublepage
+
+\listoftables
+
+\clearemptydoublepage
+
+\lstlistoflistings
+
+\clearemptydoublepage
+
+\chapter{Introduction}\label{chapter:introduction}
+\setcounter{page}{0}
+\pagenumbering{arabic}
+%from here on, start the 'real' page numbering, from 1, with normal digits
+\input{chapters/introduction}
+
+\clearemptydoublepage
+
+\chapter{Preliminaries}\label{chapter:preliminaries}
+\input{chapters/preliminaries}
+
+\clearemptydoublepage
+
+\chapter{First Real Chapter}\label{chapter:first_real_chapter}
+\input{chapters/first_real_chapter}
+
+\clearemptydoublepage
+
+\chapter{Second Real Chapter}\label{chapter:second_real_chapter}
+\input{chapters/second_real_chapter}
+
+\clearemptydoublepage
+
+\chapter{Conclusions}\label{chapter:conclusions}
+\input{chapters/conclusions}
+
+\clearemptydoublepage
+
+%Choose a good bibliography style, plain would do often, but these might be nice too
+%\bibliographystyle{these}
+\bibliographystyle{plain}
+\bibliography{references}
+
+\clearemptydoublepage
+
+\appendix
+\addcontentsline{toc}{chapter}{Appendix}
+
+\input{appendices/main}
+
+\end{document}

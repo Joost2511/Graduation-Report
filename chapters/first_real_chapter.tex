@@ -1,0 +1,343 @@
+In mathematics and engineering, optimization deals with convex functions and monotone mappings, where they define these monotone mappings to be increasing only. However similar notions can be defined for concave functions and monotone decreasing or anti-monotone mappings. In this thesis $monotone$ will refer to monotone increasing mappings, and $anti-montone$ will refer to monotone decreasing mappings. Most of these notions stem from the work of Rockafellar \cite{}, and the lecture notes from K.C. Border \cite{}
+
+\section{Anti-monotonicity}
+\begin{definition}
+    Given an operator $A : \mathcal{H} \rightarrow \mathcal{H}$, the \textit{graph of $A$} is the set $gra(A) \subseteq \mathcal{H} \times \mathcal{H}$ defined by 
+    \begin{equation}
+        gra(A) \coloneq \{(u,y)\vert u \in \mathcal{H}, y = A(u) \}.
+    \end{equation}
+\end{definition}
+An anti-monotone operator can be defined similarly as the definition of a monotone operator. 
+\begin{definition}
+Given an operator $A: \mathcal{H} \rightarrow \mathcal{H}$ is \textit{anti-monotone} if, for all $u_1, u_2 \in \mathcal{H}, y_1 = A(u_1), y_2 = A(u_2)$
+\begin{equation}
+    \langle u_2-u_1, y_2-y_1 \rangle \leq 0
+\end{equation}
+If the graph of $A$ cannot be contained by any other monotone operator, A is said to be $maximal anti-monotone$.
+\end{definition}
+\begin{definition}
+An operator is said to be \textit{$n$-cyclically anti-monotone} if, for all sets of input/output pairs $\{(u_i,y_i) | u_i \in \mathcal{H}, y_ = A(u_i) I = 0, \ldots ,n \}$
+\begin{equation}
+    \langle y_0, u_0 -u_1 \rangle + \langle y_1, u_1-u_2 \rangle + \ldots + \langle y_n, u_n-u_0 \rangle \leq 0
+\end{equation}
+If $A$ is $n$-cyclically anti-monotone for all $n \geq 1$, $A$ is said to be \textit{cyclically anti-monotone}. If the graph of $A$ cannot be contained by any other monotone operator, A is said to be $maximal cyclic anti-monotone$.
+\end{definition}
+
+For continuous operators maximality is guaranteed, so the Hankel operators associated with stable linear operators considered in this thesis are automatically maximal.
+\begin{definition}
+    An operator $A : \mathcal{H} \rightarrow \mathcal{H}$ is said to be self-adjoint if, for all $u,y \in \mathcal{H}$
+    \begin{equation}
+        \langle A(u),y \rangle = \langle u, A(y) \rangle
+    \end{equation}
+\end{definition}
+For a linear operator, we can define the cyclic anti-monotonicity equivalently to Asplund as follows: 
+Given a linear operator $A$ : $\mathcal{H}\rightarrow\mathcal{H}$, we define the \textit{complexification} of $A$, denoted $A_c$, by
+\begin{equation*}
+    A_c(u+jw) \coloneq A(u) +jA(w).
+\end{equation*}
+This operates on the complexification of $\mathcal{H}$, denoted $\mathcal{H}_c$. We endow this space with the inner product
+\begin{equation*}
+    \langle u+jw, y+jv \rangle \coloneq \langle u, y \rangle  + \langle w, v \rangle + j(\langle w,y \rangle - \langle u,v \rangle).
+\end{equation*}
+The \textit{numerical range} of an operator $A_c$ on $\mathcal{H}_c$ is defined as
+\begin{equation*}
+    W(A_c) \coloneq \left \{ \frac{\langle A_c(z), z\rangle }{\| z \| } \middle | z \in dom(A_c), \left| z \right| \neq 0 \right \}.
+\end{equation*}
+\begin{theorem}
+    A linear operator $A$ on $\mathcal{H}$ is $n$-cyclic anti-monotone if and only if, for all $z \in W(A_c), \lvert \arg z \rvert \geq \pi - \pi/n$.
+\end{theorem}
+\begin{proof}
+    From (\ref{eq: anti-mon}) we have that 
+    \begin{equation}
+        \sum_{r} \langle(A(x_r), x_r-x_{r-1} \rangle \leq 0
+        \label{eq: antisum}
+    \end{equation}
+    where index r is the $n$th cycle. Let $z = x + jy$ be an arbitrary element of $\mathcal{H_c}$ and let 
+    \begin{equation}
+        \omega = \cos{\frac{2\pi}{n}} + j \sin{\frac{2\pi}{n}},
+    \end{equation}
+    be the 'standard'$n$th root of unity. Consider the set $\{x_r\}$ of n elements in $\mathcal{H}$ defined by
+    \begin{equation}
+        x_r = \Re\omega^{r}z = \color{blue}\frac{1}{2}(\omega^{r}z+\omega^{-r}\Bar{z})
+    \end{equation}
+    where $\Bar{z}$ denotes the complex conjugate, and substitute this into (\ref{eq: antisum}).
+    \begin{align}
+        0 &\leq \sum_{r} \langle(A(x_r), x_r-x_{r-1} \rangle \\
+        & \leq \color{blue} \sum_{r} \langle T_{c}(\omega^{r}z +\omega^{-r}\Bar{z} , (\omega^{r} - \omega^{r+1})z + (\omega^{-r} - \omega^{-r+1})\Bar{z} \rangle \\
+        & \leq \color{blue} \frac{n}{2} \Re (1-\omega)\langle A_c(z), z \rangle 
+        \label{eq: ineq}
+    \end{align}
+    Replacing $\omega$ by $\Bar{\omega} = \omega^{-1}$ in the definition yields another inequality.
+    We have
+    \begin{equation}
+        \arg (1-\omega) = -\frac{\pi}{2} + \frac{\pi}{n} = -\arg(1-\Bar{\omega}).
+    \end{equation}
+    In terms of the argument  the inequality (\ref{eq: ineq}) gives 
+    \begin{align}
+                \arg \left( (1-\omega)\langle A_c(z), z \right)\rangle & \geq \frac{\pi}{2}  \\
+                \arg (1-\omega) + \arg (W(A_c)) & \geq \\
+                \frac{-\pi}{2} + \frac{\pi}{n} \arg (W(A_c)) & \geq \\
+                \arg (W(A_c)) & \geq \pi - \frac{\pi}{n}
+    \end{align}
+    and
+    \begin{align}
+        \arg \left( (1-\omega)\langle A_c(z), z \rangle \right) &  \leq -\frac{\pi}{2} \\
+        \arg (1-\omega) + \arg (W(A_c)) & \leq \\
+        \frac{-\pi}{2} + \frac{\pi}{n} \arg (W(A_c)) & \leq \\
+        \arg (W(A_c)) & \leq - \frac{\pi}{n}.
+    \end{align}
+    Doing the same for $\Bar{\omega}$ and combining these four inequalities gives the result
+    \begin{equation}
+       \lvert \arg z \rvert \geq \pi - \frac{\pi}{n}
+    \end{equation}
+    and this completes the proof.
+\end{proof}
+\begin{corollary}
+    A linear operator $A$ on $\mathcal{H}$ is cyclic anti-monotone if and only if, it is self-adjoint and, for all $u \in dom(A), \langle A(u), u \rangle \leq 0$
+\end{corollary}
+\begin{proof}
+    $n$-cyclic anti-monotonicity for all $n$ implies that $\arg z = \pi$ for all $z \in W(A_c)$. Equivalently, $\arg\langle A_c(z), z \rangle =  \pi $ for all $z = u +jw \in dom(A_c), \lVert z \rVert \neq 0$. Expanding the inner product:
+    \begin{align*}
+               \arg \langle u, A(u) \rangle  + \langle w, A(w) \rangle + j(\langle w,A(u) \rangle - \langle u,A(w) \rangle) &= \pi\\
+               \text{so } \langle u, A(u) \rangle + \langle (w, A(w)) \rangle &\leq 0 \\
+               \text{and } \langle(A(w), u) \rangle &= \langle w, A(u) \rangle.
+    \end{align*}
+\end{proof}
+
+
+A function $f : \mathcal{H} \rightarrow \mathbb{R} \in \{\infty\}$ is is said to be \textit{concave}, if for all $x, y \in \mathcal{H}$ and $\theta \in (0,1),$
+\begin{equation}
+    f(\theta x+(1-\theta)y \geq \theta f(x) + (1-\theta)f(y),
+\end{equation}
+is \textit{proper} if its value is never $\infty$ and is finite somewhere and is \textit{closed} if its hypograph is closed.
+
+Theorem Rockafellar-Border A continuous operator $A : \mathcal{H} \rightarrow \mathcal{H}$ is maximal cyclic anti-monotone if and only if it is the gradient of a closed, concave and proper function from $\mathcal{H}$ to $(-\infty, \infty]$. Moreover this function is uniquely determined by $A$ up to an additive constant.
+\section{Anti-relaxation systems}
+
+An anti-relaxation system is defined as follows:
+\begin{enumerate}
+    \item $H(s)$ admits the form
+    \begin{align*}
+        H(s) = -(G_0 + \frac{G_1}{s} + \sum_{i = 2}^{n} \frac{G_i}{s + \lambda_i}),
+    \end{align*}
+    where $G_{i} = G_{i}^{T}$ for all $i$ and $ 0 \leq \lambda_0 \leq \lambda_1 \leq \ldots \leq \lambda_N$, for some $N \in \mathbb{Z}_{\geq0}$.
+    \item $H(s)$ admits a minimal state space realization $(A_1, B_1, C_1, D_1$ such that
+    \begin{align*}
+        A_1 &= A_{1}^{T} \preceq 0 \\
+        B_1 & = -C_1^{T} \\
+        D_1 &= D_1^{T} \preceq 0.
+    \end{align*}
+    \item $D \preceq 0$,
+    \begin{align*}
+    H &=
+        \begin{pmatrix}
+            CB & CAB & \cdots & CA^{n-1}B\\
+            CAB & CA^{2}B &\cdots & CA^{n}b \\
+            \vdots & \vdots & \ddots & \vdots \\
+            CA^{n-1}B & CAB & \cdots & CA^{2n-2}B \\
+        \end{pmatrix} &\preceq 0 \\
+      \overleftarrow{H} &=  \begin{pmatrix}
+            CAB & CA^{2}B & \cdots & CA^{n}B\\
+            CA^{2}B & CA^{3}B &\cdots & CA^{n+1}b \\
+            \vdots & \vdots & \ddots & \vdots \\
+            CA^{n}B & CA^{n+1}B & \cdots & CA^{2n-1}B \\
+        \end{pmatrix} &\succeq 0 \\
+    \end{align*}
+    and all of these matrices are symmetric.
+\end{enumerate}
+Proof of point 3. We can decompose the Hankel matrix as a product of the observability matrix $\mathcal{N}$ and controllability matrix $\mathcal{R}$ as
+\begin{equation}
+    H = \mathcal{N}\mathcal{R}
+\end{equation}
+where the these matrices are given by 
+\begin{align}
+    \mathcal{N} &= 
+    \begin{pmatrix}
+        C \\
+        CA \\
+        \vdots \\
+        CA^{n-1}
+    \end{pmatrix}
+     =   
+    \begin{pmatrix}
+        -B^{\top} \\
+        -B^{\top}A \\
+        \vdots \\
+        -B^{\top}A^{n-1}
+    \end{pmatrix}
+     = -
+    \begin{pmatrix}
+        B & BA & \ldots & BA^{n-1}
+    \end{pmatrix}^{\top} \\
+    \mathcal{R} &=     
+    \begin{pmatrix}
+        B & BA & \ldots & BA^{n-1}
+    \end{pmatrix}.
+\end{align}
+Thus the Hankel matrix $H$ can be decomposed as a product
+\begin{equation}
+    H = -\mathcal{R}^{\top}\mathcal{R}
+\end{equation}
+Any matrix $M$ that can be decomposed in a product $M = B^{\top}B$ is positive semi-definite, thus $H$ is negative semi-definite.
+Equivalently it is possible to decompose the shifted Hankel matrix $\overleftarrow{H}$ as 
+\begin{equation}
+    \overleftarrow{H} = -\overleftarrow{\mathcal{R}}^{\top}A\overleftarrow{\mathcal{R}}
+\end{equation}
+If matrix $M$ is positive semi-definite, then $B^{\top}MB$ is positive semi-definite. Here $A$ is negative semi-definite, thus $-A$ is positive semi-definite, thus giving
+\begin{equation}
+    0 \preceq \overleftarrow{\mathcal{R}}^{\top}-A\overleftarrow{\mathcal{R}} = - \overleftarrow{\mathcal{R}}^{\top}A\overleftarrow{\mathcal{R}}
+\end{equation}
+so the shifted Hankel matrix $\overleftarrow{H}$ is positive semi-definite.
+
+\subsection{Cyclic monotonicity of Hankel operator?}
+For a relaxation system, the Hankel operator is cyclically monotone. However, this is not the case for an anti-relaxation system
+Cyclic monotonicity of $\Gamma_h$ is equivalent to the following two conditions for all $ u, w \in L_{2}^{m}$:
+\begin{align}
+    \langle \Gamma_h w,u\rangle &= \langle w, \Gamma_h u \rangle \\
+    \langle u, \Gamma_h u \rangle &\geq 0.
+\end{align}
+The first property follows from Thomas Chaffey's paper. For the second property, we have the following
+\begin{align*}
+        \langle u, \Gamma_h u \rangle &= \int_{0}^{\infty} u^{T}(t)\int_{0}^{\infty}h(t+\tau)u(\tau) \, d\tau \, dt. \\
+        &= \int_{0}^{\infty} u^{T}(t)\int_{0}^{\infty}C_1e^{A_1t}e^{A_1\tau}B_1u(\tau) \, d\tau \, dt. \\
+        &= (-\int_{0}^{\infty}u(t)e^{A_1t}B_1 \, dt)^{T}\int_{0}^{\infty}u(t)e^{A_1t}B_1 \, dt \\
+        &\leq 0.
+\end{align*}
+So it is cyclically anti-monotone? (Still does not change sign)
+
+\subsection{Intrinsic storage function of a relaxation system}
+The storage function for relaxation systems is defined as $\frac{1}{2}\langle u,\Gamma_hu\rangle$. 
+Consider the linear RC circuit as shown in Figure 1. Here the voltage on the capacitor is denoted by $v_c$, and the following state space model is obtained for the circuit
+\begin{equation}
+    \begin{split}
+        \frac{d}{dt}v_c &= \frac{-1}{R_1C}v_c + \begin{pmatrix}
+            \frac{1}{C} & \frac{1}{C}
+        \end{pmatrix}
+        \begin{pmatrix}
+            i_1 \\ i_2
+        \end{pmatrix}, \\
+        \begin{pmatrix}
+            v_1 \\ v_2
+        \end{pmatrix}
+        & = \begin{pmatrix}
+            -1 \\ -1
+        \end{pmatrix}
+        v_2 + \begin{pmatrix}
+            0 & 0 \\
+            0 & R_2
+        \end{pmatrix}
+        \begin{pmatrix}
+            i_1 \\ i_2
+        \end{pmatrix}
+        .
+    \end{split}
+\end{equation}
+\begin{center}
+    \begin{circuitikz}[american voltages]
+        \draw (0,0) to [short, *-*] (8,0);
+        \draw (2,0) to [R, l_=$R_1$] (2,2);
+        \draw (4,0) [C, l_=$C$] to (4,2);
+        \draw (0,2) to [short, *-, i_=$i_1$] (2,2);
+        \draw (2,2) to [short, -] (4,2);
+        \draw (8,2) to [short,*-, i_=$i_2$] (6,2);
+        \draw (6,2) to [R , l_=$R_2$] (4,2);
+        \draw (0,0) to [open, v^= $v_1$] (0,2);
+        \draw (8,0) to [open, v^= $v_2$] (8,2);
+    \end{circuitikz}
+\end{center}
+Solving the state space gives the Hankel operator
+\begin{equation}
+    v(\zeta) = \int_{0}^{\infty} 
+    \begin{pmatrix}
+        -1 \\ -1
+    \end{pmatrix}
+    e^{\frac{-1}{R_1C}(\zeta +\tau)}
+    \begin{pmatrix}
+        \frac{1}{C} & \frac{1}{C}
+    \end{pmatrix}
+    i_t(\tau) \, d\tau,
+\end{equation}
+plus an additional term $R_2i_2(0)$ when $\zeta = 0$. Now we compute the inner product $\frac{1}{2}\langle i_t, v \rangle$ over $L_2$ gives
+\begin{equation}
+    \begin{split}
+        & \frac{1}{2}
+        \int_{0}^{\infty} i_t(\zeta)^{\top}
+        \int_{0}^{\infty} 
+        \begin{pmatrix}
+            -1 \\ -1
+        \end{pmatrix}
+        e^{\frac{-1}{R_1C}(\zeta + \tau)}
+        \begin{pmatrix}
+        \frac{1}{C} & \frac{1}{C}
+        \end{pmatrix}
+        i_t(\tau) 
+        \, d\tau
+        \, d\zeta \\
+        &= -\frac{1}{2C}\left( \int_{0}^{\infty} (i_1(\zeta) + i_2(\zeta))e^{\frac{-1}{R_1C}\zeta} \, d\zeta \right.\\
+        &\left. \qquad \quad \ \  \ \int_{0}^{\infty} (i_1(\tau) + i_2(\tau))e^{\frac{-1}{R_1C}\tau} \, d\tau \right)\\
+        & = -\frac{1}{2C}q_c(0)^2 ,
+    \end{split}
+\end{equation}
+where $q_c = \frac{1}{C}v_c$ is the charge on the capacitor
+
+
+
+
+
+
+\section{Existence of limit cycles}
+\tikzstyle{block} = [draw, rectangle, 
+    minimum height=3em, minimum width=4em]
+\tikzstyle{sum} = [draw, circle, node distance=1cm]
+\tikzstyle{input} = [coordinate]
+\tikzstyle{output} = [coordinate]
+\tikzstyle{pinstyle} = [pin edge={to-,thin,black}]
+
+\begin{figure}[h]
+    \centering
+\begin{tikzpicture}[auto, node distance=2cm,>=latex']
+    % We start by placing the blocks
+    \node [input, name=input] {$d$};
+    \node [sum, right of=input] (sum) {};
+    \node [block, right of=sum, node distance=1.5cm] (system) {$H(s)$};
+    % We draw an edge between the controller and system block to 
+    % calculate the coordinate u. We need it to place the measurement block. 
+    \node [output, right of=system, node distance=2cm] (output) {};
+    \node [block, below of=system] (relay) {$\ideal$};
+
+    % Once the nodes are placed, connecting them is easy. 
+    \draw [draw,->] (input) -- node {$d$} (sum);
+    \draw [->] (sum) -- node {$u$} (system);
+    \draw [->] (system) -- node [name=y] {$y$}(output);
+    \draw [->] (y) |- (relay);
+    \draw [->] (relay) -| node[pos=0.99] {$-$} 
+        node [near end] {} (sum);
+\end{tikzpicture}
+    \caption{Block diagram of a basic relay feedback system}
+    \label{fig: RFS}
+\end{figure}
+Consider the relaxation system in feedback in a block diagram as given in Fig. \ref{fig: RFS}. For this diagram, we can write then output equations as follows
+\begin{equation}
+    \begin{split}
+            y &= H(s)u \\
+            u &= d-sgn(y)
+    \end{split}
+\end{equation}
+When $d = 0$ and we solve for u we can get the following inclusion problem
+\begin{equation}
+    H_p(s)u + \mathcal{N}_{[-1,1]^n}(u) \ni 0,
+    \label{eq: monotoneonly}
+\end{equation}
+where  $\mathcal{N}_{[-1,1]^n}(u)$ denotes the normal cone of the compact set $[-1,1]^n$, as given by
+\begin{equation}
+    [\mathcal{N}_{[-1,1]^n}(x)]_i = \begin{cases}
+        -\mathbb{R}_+, & \text{ if } x_i=-1,\\
+        +\mathbb{R}_+, & \text{ if } x_i=1, \\
+        \{0\}, &\text{ if } x_i\in (-1, 1),
+    \end{cases}
+\end{equation}
+which is the relational inverse of the relay. We will show that the solution to the inclusion problem is only a trivial solution. We look at each operator's zeros separately to show that this will be $u = 0$. As the normal cone is only maximal monotone and not strictly monotone, it will not necessarily give a single solution. Indeed, looking at the graph of the normal cone, it is zero for any input in the range of $u = (-1, 1)$. For a relaxation system, we know the solution is given by
+\begin{equation}
+    y(t) = G_0\delta(t) + G_1u(t) + \left[\sum_{i = 2}^{n} G_ie^{\lambda_i t} \right]u(t)
+\end{equation}
+We can see that, if there is no periodic input, the solution will be a sum of exponential decaying functions. Therefore there are no periodic solutions to the inclusion problem and only the trivial solution $u(t) = 0$ is a solution.
